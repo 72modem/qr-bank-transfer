@@ -5,37 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>송금할 은행 선택</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 20px; }
-        h2 { color: #333; }
-        .bank-list { display: flex; flex-direction: column; align-items: center; }
-        button { padding: 10px 20px; margin: 5px; font-size: 16px; cursor: pointer; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            color: #333;
+        }
+        .bank-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+        .bank-button {
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #fff;
+        }
+        .nh-central { background-color: #00752a; }
+        .nh-local { background-color: #028b47; }
+        .woori { background-color: #007bc8; }
+        .post { background-color: #ff6600; }
+        .mg { background-color: #117a65; }
+        .imbank { background-color: #9b59b6; }
+        .kakao { background-color: #ffcd00; color: #000; }
+        .ibk { background-color: #004ea1; }
+        .kb { background-color: #ffcc00; color: #000; }
+        .hana { background-color: #009688; }
+        .shinhan { background-color: #0033a0; }
+        .toss { background-color: #1d4ed8; }
     </style>
 </head>
 <body>
     <h2>송금할 은행을 선택하세요</h2>
     <div class="bank-list">
-        <button onclick="sendMoney('nh')">농협</button>
-        <button onclick="sendMoney('kb')">국민은행</button>
-        <button onclick="sendMoney('woori')">우리은행</button>
-        <button onclick="sendMoney('post')">우체국</button>
-        <button onclick="sendMoney('kakao')">카카오뱅크</button>
-        <button onclick="sendMoney('mg')">새마을금고</button>
+        <button class="bank-button nh-central" onclick="sendMoney('nh-central')">농협중앙</button>
+        <button class="bank-button nh-local" onclick="sendMoney('nh-local')">단위농협</button>
+        <button class="bank-button woori" onclick="sendMoney('woori')">우리은행</button>
+        <button class="bank-button post" onclick="sendMoney('post')">우체국</button>
+        <button class="bank-button mg" onclick="sendMoney('mg')">새마을금고</button>
+        <button class="bank-button imbank" onclick="sendMoney('imbank')">아이엠뱅크</button>
+        <button class="bank-button kakao" onclick="sendMoney('kakao')">카카오뱅크</button>
+        <button class="bank-button ibk" onclick="sendMoney('ibk')">기업은행</button>
+        <button class="bank-button kb" onclick="sendMoney('kb')">국민은행</button>
+        <button class="bank-button hana" onclick="sendMoney('hana')">하나은행</button>
+        <button class="bank-button shinhan" onclick="sendMoney('shinhan')">신한은행</button>
+        <button class="bank-button toss" onclick="sendMoney('toss')">토스</button>
     </div>
 
     <script>
         function sendMoney(bank) {
             let account = "74111052063094"; // 송금 받을 계좌
             let name = "전상욱"; // 예금주
-
             let url = "";
 
-            if (bank === "nh") url = `https://banking.nonghyup.com/transfer?account=${account}&name=${name}`;
-            else if (bank === "kb") url = `https://obank.kbstar.com/quics?page=C101590&account=${account}`;
-            else if (bank === "woori") url = `https://spib.wooribank.com/pib/common/CusLogin.jsp?account=${account}`;
-            else if (bank === "post") url = `https://www.epostbank.go.kr/transfer?account=${account}`;
-            else if (bank === "kakao") url = `https://www.kakaobank.com/transfer?account=${account}`;
-            else if (bank === "mg") url = `https://smart.mg.co.kr/transfer?account=${account}`;
-
+            switch (bank) {
+                case "nh-central": url = `https://banking.nonghyup.com/transfer?account=${account}`; break;
+                case "nh-local": url = `https://banking.nonghyup.com/transfer?account=${account}`; break;
+                case "woori": url = `https://spib.wooribank.com/pib/common/CusLogin.jsp?account=${account}`; break;
+                case "post": url = `https://www.epostbank.go.kr/transfer?account=${account}`; break;
+                case "mg": url = `https://smart.mg.co.kr/transfer?account=${account}`; break;
+                case "imbank": url = `https://www.iambank.com/transfer?account=${account}`; break;
+                case "kakao": url = `https://www.kakaobank.com/transfer?account=${account}`; break;
+                case "ibk": url = `https://mybank.ibk.co.kr/transfer?account=${account}`; break;
+                case "kb": url = `https://obank.kbstar.com/quics?page=C101590&account=${account}`; break;
+                case "hana": url = `https://www.hanabank.com/transfer?account=${account}`; break;
+                case "shinhan": url = `https://www.shinhan.com/transfer?account=${account}`; break;
+                case "toss": url = `https://toss.me/${account}`; break;
+            }
             window.location.href = url;
         }
     </script>

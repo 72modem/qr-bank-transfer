@@ -62,63 +62,62 @@
 
     <script>
         function sendMoney(bank) {
-            let account = "74111052063094"; // 송금 받을 계좌
-            let name = "전상욱"; // 예금주
+            let account = "74111052063094";
+            let name = "전상욱";
             let appUrl = "";
             let webUrl = "";
+            let playStoreUrl = "";
 
             switch (bank) {
                 case "nh-central":
                 case "nh-local":
                     appUrl = `nhbank://transfer?account=${account}`;
                     webUrl = `https://banking.nonghyup.com/transfer?account=${account}`;
+                    playStoreUrl = "https://play.google.com/store/apps/details?id=com.nhbank.smart";
                     break;
                 case "woori":
                     appUrl = `wooribank://transfer?account=${account}`;
                     webUrl = `https://spib.wooribank.com/pib/common/CusLogin.jsp?account=${account}`;
+                    playStoreUrl = "https://play.google.com/store/apps/details?id=com.wooribank.pibsmart";
                     break;
                 case "post":
                     appUrl = `postbank://transfer?account=${account}`;
                     webUrl = `https://www.epostbank.go.kr/transfer?account=${account}`;
+                    playStoreUrl = "https://play.google.com/store/apps/details?id=kr.go.epost.psf.sdsi";
                     break;
                 case "mg":
                     appUrl = `mgbank://transfer?account=${account}`;
                     webUrl = `https://smart.mg.co.kr/transfer?account=${account}`;
-                    break;
-                case "imbank":
-                    appUrl = `iambank://transfer?account=${account}`;
-                    webUrl = `https://www.iambank.com/transfer?account=${account}`;
+                    playStoreUrl = "https://play.google.com/store/apps/details?id=com.kfcc.mobilebank";
                     break;
                 case "kakao":
                     appUrl = `kakaobank://transfer?account=${account}`;
                     webUrl = `https://www.kakaobank.com/transfer?account=${account}`;
+                    playStoreUrl = "https://play.google.com/store/apps/details?id=com.kakaobank.channel";
                     break;
                 case "ibk":
                     appUrl = `ibkbank://transfer?account=${account}`;
                     webUrl = `https://mybank.ibk.co.kr/transfer?account=${account}`;
-                    break;
-                case "kb":
-                    appUrl = `kbstar://transfer?account=${account}`;
-                    webUrl = `https://obank.kbstar.com/quics?page=C101590&account=${account}`;
-                    break;
-                case "hana":
-                    appUrl = `hanabank://transfer?account=${account}`;
-                    webUrl = `https://www.hanabank.com/transfer?account=${account}`;
+                    playStoreUrl = "https://play.google.com/store/apps/details?id=com.ibk.neobanking";
                     break;
                 case "shinhan":
                     appUrl = `shinhanbank://transfer?account=${account}`;
                     webUrl = `https://www.shinhan.com/transfer?account=${account}`;
+                    playStoreUrl = "https://play.google.com/store/apps/details?id=com.shinhan.sbanking";
                     break;
                 case "toss":
                     appUrl = `toss://transfer?account=${account}`;
                     webUrl = `https://toss.me/${account}`;
+                    playStoreUrl = "https://play.google.com/store/apps/details?id=viva.republica.toss";
                     break;
             }
             
-            // 앱으로 실행, 앱이 없으면 웹으로 이동
             window.location.href = appUrl;
             setTimeout(() => {
                 window.location.href = webUrl;
+                setTimeout(() => {
+                    window.location.href = playStoreUrl;
+                }, 3000);
             }, 3000);
         }
     </script>
